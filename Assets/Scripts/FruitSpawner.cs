@@ -1,26 +1,29 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//1. ¿ÀºêÁ§Æ® Ç®¿¡ ºñÈ°¼ºÈ­µÈ º¹¼¿À» ´ã°í ½Í´Ù
-//ÇÊ¿ä ¼Ó¼º : ¿ÀºêÁ§Æ® Ç®, ¿ÀºêÁ§Æ® Ç®ÀÇ Å©±â
+
 public class FruitSpawner : MonoBehaviour
 {
     public GameObject fruitFactory;
-    public int fruitPoolSize = 20; //¿ÀºêÁ§Æ® Ç®ÀÇ Å©±â
-    public static List<GameObject> fruitPool = new List<GameObject>(); //¿ÀºêÁ§Æ® Ç®
+    public int fruitPoolSize = 20; 
+    public static List<GameObject> fruitPool = new List<GameObject>(); //ì˜¤ë¸Œì íŠ¸ í’€
+
+    public float createTime = 0.1f; //ìƒì„± ì‹œê°„
+    float currentTime = 0; //ê²½ê³¼ ì‹œê°„
+
 
     
     void Start()
     {
-        //¿ÀºêÁ§Æ® Ç®¿¡ ºñÈ°¼ºÈ­µÈ º¹¼¿À» ´ã°í ½Í´Ù
+        //ì˜¤ë¸Œì íŠ¸ í’€ì— ë¹„í™œì„±í™”ëœ ë³µì…€ì„ ë‹´ê³  ì‹¶ë‹¤
         for(int i = 0; i < fruitPoolSize; i++)
         {
-            //1. º¹¼¿ °øÀå¿¡¼­ º¹¼¿ »ı¼ºÇÏ±â
+            //1. ë³µì…€ ê³µì¥ì—ì„œ ë³µì…€ ìƒì„±í•˜ê¸°
             GameObject fruit = Instantiate(fruitFactory);
-            //2. º¹¼¿ ºñÈ°¼ºÈ­ ÇÏ±â
+            //2. ë³µì…€ ë¹„í™œì„±í™” í•˜ê¸°
             fruit.SetActive(false);
-            //3. º¹¼¿À» ¿ÀºêÁ§Æ® Ç®¿¡ ´ã°í ½Í´Ù
+            //3. ë³µì…€ì„ ì˜¤ë¸Œì íŠ¸ í’€ì— ë‹´ê³  ì‹¶ë‹¤
             fruitPool.Add(fruit);
         }
         
@@ -29,22 +32,36 @@ public class FruitSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //»ç¿ëÀÚ°¡ ¸¶¿ì½º¸¦ Å¬¸¯ÇÑ ÁöÁ¡¿¡ º¹¼¿À» 1°³ ¸¸µé°í ½Í´Ù
-        //1. »ç¿ëÀÚ°¡ ¸¶¿ì½º¸¦ Å¬¸¯Çß´Ù¸é
-        if (Input.GetButtonDown("Fire1"))
+        //ì¼ì • ì‹œê°„ë§ˆë‹¤ ë³µì…€ì„ ë§Œë“¤ê³  ì‹¶ë‹¤
+        //1. ê²½ê³¼ ì‹œê°„ì´ íë¥¸ë‹¤
+        currentTime += Time.deltaTime;
+
+        //2. ê²½ê³¼ ì‹œê°„ì´ ìƒì„± ì‹œê°„ì„ ì´ˆê³¼í–ˆë‹¤ë©´
+        if(currentTime > createTime)
         {
-            //2. ¸¶¿ì½ºÀÇ À§Ä¡°¡ ¹Ù´Ú À§¿¡ À§Ä¡ÇØ ÀÖ´Ù¸é
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo = new RaycastHit();
-            if(Physics.Raycast(ray, out hitInfo))
+            if (Physics.Raycast(ray, out hitInfo))
             {
-                //3. º¹¼¿ °øÀå¿¡¼­ º¹¼¿À» ¸¸µé¾î¾ß ÇÑ´Ù
-                GameObject fruit = Instantiate(fruitFactory);
-                //4. º¹¼¿À» ¹èÄ¡ÇÏ°í ½Í´Ù
-                fruit.transform.position = hitInfo.point;
-            }            
+                //ë³µì…€ ì˜¤ë¸Œì íŠ¸ í’€ ì´ìš©í•˜ê¸°
+                //1. ë§Œì•½ ì˜¤ë¸Œì íŠ¸ í’€ì— ë³µì…€ì´ ìˆë‹¤ë©´
+                if (fruitPool.Count > 0)
+                {
+                    //ë³µì…€ì„ ìƒì„±í–ˆì„ ë•Œë§Œ ê²½ê³¼ ì‹œê°„ ì´ˆê¸°í™”
+                    currentTime = 0;
+                    //2. ì˜¤ë¸Œì íŠ¸ í’€ì—ì„œ ë³µì…€ì„ í•˜ë‚˜ ê°€ì ¸ì˜¨ë‹¤
+                    GameObject fruit = fruitPool[0];
+                    //3. ë³µì…€ì„ í™œì„±í™”í•œë‹¤
+                    fruit.SetActive(true);
+                    //4. ë³µì…€ì„ ë°°ì¹˜í•˜ê³  ì‹¶ë‹¤
+                    fruit.transform.position = hitInfo.point;
+                    //5. ì˜¤ë¸Œì íŠ¸ í’€ì—ì„œ ë³µì…€ì„ ì œê±°í•œë‹¤
+                    fruitPool.RemoveAt(0);
+                }
 
-        }        
+            }
 
+        }   
+        
     }
 }

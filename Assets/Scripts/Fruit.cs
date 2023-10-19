@@ -9,11 +9,10 @@ public class Fruit : MonoBehaviour
     public float destoryTime = 3.0f; 
     float currentTime; 
     
-    void Start()
+    void OnEnable()
     {
-       
+        currentTime = 0;
         Vector3 direction = Random.insideUnitSphere;
-        
         Rigidbody rb = gameObject.GetComponent<Rigidbody>();
         rb.velocity = direction * speed;
         
@@ -24,8 +23,11 @@ public class Fruit : MonoBehaviour
         currentTime += Time.deltaTime;
         
         if(currentTime > destoryTime)
-        {            
-            Destroy(gameObject);
+        {
+            //Voxel을 비활성화 시킨다
+            gameObject.SetActive(false);
+            //오브젝트 풀에 다시 넣어준다
+            FruitSpawner.fruitPool.Add(gameObject);
         }
     }
 }

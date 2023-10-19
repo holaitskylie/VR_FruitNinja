@@ -313,7 +313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &765653084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,6 +377,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitFactory: {fileID: 2742086013361637055, guid: 2472c6e6f7806b14da4ddc56db480378, type: 3}
+  fruitPoolSize: 20
+  createTime: 0.5
 --- !u!4 &926366345
 Transform:
   m_ObjectHideFlags: 0
