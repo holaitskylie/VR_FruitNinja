@@ -15,16 +15,23 @@ public class FruitSpawner : MonoBehaviour
     public float createTime = 0.1f; //생성 시간
     float currentTime = 0; //경과 시간
 
-    public Transform spawnPoints;
+    public Transform spawnPoints; //spawn positions
     List<Vector3> spawnPointList = new List<Vector3>();
 
     public GameObject bombPrefab;
 
     
-    void Start()
+
+    void Awake()
     {
-        //과일 스폰 포인트를 리스트에 담는다
-        foreach(Transform spawnpoint in spawnPoints)
+        
+    }
+    
+    void Start()
+    {       
+
+        //과일을 스폰할 포인트를 리스트에 담는다
+        foreach (Transform spawnpoint in spawnPoints)
         {
             spawnPointList.Add(spawnpoint.localPosition);
         }
@@ -49,8 +56,10 @@ public class FruitSpawner : MonoBehaviour
             fruitPool.Add(fruit);
         }*/
         
-    }
+    }   
 
+
+    
     // Update is called once per frame
     void Update()
     {
@@ -58,8 +67,9 @@ public class FruitSpawner : MonoBehaviour
         //1. 경과 시간이 흐른다
         currentTime += Time.deltaTime;
 
+        
         //2. 경과 시간이 생성 시간을 초과했다면
-        if(currentTime > createTime)
+        if (currentTime > createTime)
         {
 
             //복셀 오브젝트 풀 이용하기
@@ -82,32 +92,15 @@ public class FruitSpawner : MonoBehaviour
                 //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 //RaycastHit hitInfo = new RaycastHit();
 
-                /*
-                if (Physics.Raycast(ray, out hitInfo))
-                {
-                    //복셀 오브젝트 풀 이용하기
-                    //1. 만약 오브젝트 풀에 복셀이 있다면
-                    if (fruitPool.Count > 0)
-                    {
-                        //복셀을 생성했을 때만 경과 시간 초기화
-                        currentTime = 0;
-
-
-                        int index = Random.Range(0, fruitPool.Count);
-                        //2. 오브젝트 풀에서 복셀을 하나 가져온다
-                        GameObject fruit = fruitPool[index];
-                        //3. 복셀을 활성화한다
-                        fruit.SetActive(true);
-                        //4. 복셀을 배치하고 싶다
-                        fruit.transform.position = hitInfo.point;
-                        //5. 오브젝트 풀에서 복셀을 제거한다
-                        fruitPool.RemoveAt(index);
-                    }*/
-
+                
 
             }
+        }
 
-        }   
+
+        
         
     }
+
+
 }
