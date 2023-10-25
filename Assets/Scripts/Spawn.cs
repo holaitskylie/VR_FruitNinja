@@ -31,7 +31,7 @@ public class Spawn : MonoBehaviour
 
                 GameObject obj = Instantiate(prefab[iPrefab], pos[iPos].position, Quaternion.identity);
 
-                Destroy(obj, 5f);
+                Destroy(obj, 10f);
 
                 Rigidbody rb = obj.GetComponent<Rigidbody>();
                 rb.AddForce(Vector3.up * Random.Range(4.0f, 10.0f), ForceMode.VelocityChange);
