@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,14 +7,16 @@ public class Fruit : MonoBehaviour
 {
     public float speed = 5; 
     public float destoryTime = 3.0f; 
-    float currentTime; 
-    
+    float currentTime;
+
+    private bool isHit = false;
+
     void OnEnable()
     {
         currentTime = 0;
-        Vector3 direction = Random.insideUnitSphere;
-        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-        rb.velocity = direction * speed;
+        //Vector3 direction = Random.insideUnitSphere;
+        //Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+        //rb.velocity = direction * speed;
         
     }
 
@@ -24,10 +26,22 @@ public class Fruit : MonoBehaviour
         
         if(currentTime > destoryTime)
         {
-            //VoxelÀ» ºñÈ°¼ºÈ­ ½ÃÅ²´Ù
+            //Voxelì„ ë¹„í™œì„±í™” ì‹œí‚¨ë‹¤
             gameObject.SetActive(false);
-            //¿ÀºêÁ§Æ® Ç®¿¡ ´Ù½Ã ³Ö¾îÁØ´Ù
+            //ì˜¤ë¸Œì íŠ¸ í’€ì— ë‹¤ì‹œ ë„£ì–´ì¤€ë‹¤
             FruitSpawner.fruitPool.Add(gameObject);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Sword" && !isHit)
+        {
+            isHit = true;
+            Destroy(gameObject);
+
+            Debug.Log("Fruit Sliced!");
+            
         }
     }
 }
