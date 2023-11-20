@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,9 +26,9 @@ public class Fruit : MonoBehaviour
         
         if(currentTime > destoryTime)
         {
-            //VoxelÀ» ºñÈ°¼ºÈ­ ½ÃÅ²´Ù
+            //Voxelì„ ë¹„í™œì„±í™” ì‹œí‚¨ë‹¤
             gameObject.SetActive(false);
-            //¿ÀºêÁ§Æ® Ç®¿¡ ´Ù½Ã ³Ö¾îÁØ´Ù
+            //ì˜¤ë¸Œì íŠ¸ í’€ì— ë‹¤ì‹œ ë„£ì–´ì¤€ë‹¤
             FruitSpawner.fruitPool.Add(gameObject);
         }
     }

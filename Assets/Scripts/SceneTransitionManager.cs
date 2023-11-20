@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class SceneTransitionManager : MonoBehaviour
 {
     public FadeScreen fadeScreen;
+    public int sceneIndex = 1;
+    private bool isHit = false;
 
     public void GoToScene(int sceneIndex)
     {
@@ -44,5 +46,17 @@ public class SceneTransitionManager : MonoBehaviour
 
         operation.allowSceneActivation = true;
 
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Sword" && !isHit)
+        {
+            isHit = true;
+            Destroy(gameObject);
+
+            Debug.Log("Start Scene transition!");
+            GoToScene(sceneIndex);
+
+        }
     }
 }
