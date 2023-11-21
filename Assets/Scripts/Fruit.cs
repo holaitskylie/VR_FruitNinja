@@ -13,11 +13,7 @@ public class Fruit : MonoBehaviour
 
     void OnEnable()
     {
-        currentTime = 0;
-        //Vector3 direction = Random.insideUnitSphere;
-        //Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-        //rb.velocity = direction * speed;
-        
+        currentTime = 0;     
     }
 
     void Update()
@@ -41,6 +37,7 @@ public class Fruit : MonoBehaviour
             Destroy(gameObject);
 
             Debug.Log("Fruit Sliced!");
+
             
         }
     }
