@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
 
     public Text timeText;
     public Text scoreText;
-    int score = 0;    
+    public int score = 0;    
 
     private void Update()
     {

@@ -3,12 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 //화면이 완전히 페이드 되기까지 기다린 후에 씬을 전환한다
 public class SceneTransitionManager : MonoBehaviour
 {
     public FadeScreen fadeScreen;
     public int sceneIndex = 1;
-    private bool isHit = false;
+    
+
+    public LayerMask layer;
+
+    private void Update()
+    {
+        RaycastHit hit;
+        //시작 위치, 검이 향하는 방향, 검이 부딪힌 오브젝트의 정보, 길이 2, 레이어 마스트(같은 레이어 마스크만 충돌 처리함)
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 2, layer))
+        {
+            GoToScene(1);
+
+        }
+    }
 
     public void GoToScene(int sceneIndex)
     {
@@ -47,16 +61,5 @@ public class SceneTransitionManager : MonoBehaviour
         operation.allowSceneActivation = true;
 
     }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Sword" && !isHit)
-        {
-            isHit = true;
-            Destroy(gameObject);
-
-            Debug.Log("Start Scene transition!");
-            GoToScene(sceneIndex);
-
-        }
-    }
+    
 }

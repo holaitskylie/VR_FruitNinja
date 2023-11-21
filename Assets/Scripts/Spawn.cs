@@ -8,7 +8,9 @@ public class Spawn : MonoBehaviour
     public GameObject[] prefab; //fruits
 
     AudioSource audio;
-    
+
+    float minWaitTime = 2.0f;
+    float maxWaitTime = 4.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,7 @@ public class Spawn : MonoBehaviour
                 yield break; // Coroutine Á¾·á
             }
 
-            float waitTime = Random.Range(2.0f, 4.0f);
+            float waitTime = Random.Range(minWaitTime, maxWaitTime);
             yield return new WaitForSeconds(waitTime);
 
             for(int i = 0; i <pos.Length; i++)
@@ -36,7 +38,7 @@ public class Spawn : MonoBehaviour
 
                 GameObject obj = Instantiate(prefab[iPrefab], pos[iPos].position, Quaternion.identity);
 
-                Destroy(obj, 10f);
+                Destroy(obj, 3f);
 
                 Rigidbody rb = obj.GetComponent<Rigidbody>();
                 rb.AddForce(Vector3.up * Random.Range(4.0f, 10.0f), ForceMode.VelocityChange);
@@ -45,6 +47,23 @@ public class Spawn : MonoBehaviour
             audio.Play();
             
         }
+    }
+
+    public void DecreaseInterval()
+    {
+        minWaitTime = Mathf.Max(minWaitTime - 0.5f, 1.0f);
+        maxWaitTime = Mathf.Max(maxWaitTime - 0.5f, 2.0f);
+
+        if(maxWaitTime <= 0.1f)
+        {
+            maxWaitTime = 0.1f;
+        }
+
+        if(minWaitTime <= 0.1f)
+        {
+            minWaitTime = 0.1f;
+        }
+
     }
     
         

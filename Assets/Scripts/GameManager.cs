@@ -38,6 +38,16 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.UpdateScore(newScore);
 
+        if(UIManager.Instance.score % 100 == 0)
+        {
+            Spawn spawn = FindObjectOfType<Spawn>();
+            if(spawn != null)
+            {
+                spawn.DecreaseInterval();
+                Debug.Log("Level Upgrade");
+            }
+        }
+
     }
 
     public void EndGame()
