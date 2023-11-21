@@ -41,7 +41,9 @@ public class Spawn : MonoBehaviour
                 Destroy(obj, 3f);
 
                 Rigidbody rb = obj.GetComponent<Rigidbody>();
+                //ForceMode.VelocityChange : 현재 속도를 무시하고 주어진 힘의 크기와 방향으로 속도 설정
                 rb.AddForce(Vector3.up * Random.Range(4.0f, 10.0f), ForceMode.VelocityChange);
+                //rb.AddForce(Vector3.up * Random.Range(4.0f, 10.0f));
             }
 
             audio.Play();
