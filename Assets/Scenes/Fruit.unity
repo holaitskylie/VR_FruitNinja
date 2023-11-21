@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameover: 0
-  timer: 30
+  timer: 60
 --- !u!82 &73170103
 AudioSource:
   m_ObjectHideFlags: 0

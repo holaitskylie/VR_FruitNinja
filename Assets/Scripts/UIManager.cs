@@ -26,16 +26,16 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.instance.isGameover)
+        if (!GameManager.Instance.isGameover)
         {
-            int intTimer = (int)GameManager.instance.timer;
+            int intTimer = (int)GameManager.Instance.timer;
             timeText.text = "TIME " + intTimer.ToString();
         }
     }
 
     public void UpdateScore(int newScore)
     {
-        if (!GameManager.instance.isGameover)
+        if (!GameManager.Instance.isGameover)
         {
             score += newScore;
             scoreText.text = "" + score;
@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
 
     public void SetActiveGameoverUI()
     {
-        if (GameManager.instance.isGameover)
+        if (GameManager.Instance.isGameover)
         {
             timeText.text = "GAME OVER!!";
 

@@ -9,13 +9,7 @@ public class Saber : MonoBehaviour
 
     [SerializeField] ParticleSystem sliceEffect;
     int scoreAmount = 10;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   
 
     // Update is called once per frame
     void Update()
@@ -34,7 +28,7 @@ public class Saber : MonoBehaviour
                 Debug.Log("Effect Play");
 
                 //점수 획득
-                GameManager.instance.AddScore(scoreAmount);
+                GameManager.Instance.AddScore(scoreAmount);
                 Destroy(hit.transform.gameObject);
 
             }            

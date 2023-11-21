@@ -23,7 +23,7 @@ public class Spawn : MonoBehaviour
     {
         while (true)
         {
-            if (GameManager.instance.isGameover)
+            if (GameManager.Instance.isGameover)
             {
                 yield break; // Coroutine Á¾·á
             }
