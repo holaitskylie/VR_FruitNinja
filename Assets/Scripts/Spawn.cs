@@ -21,6 +21,11 @@ public class Spawn : MonoBehaviour
     {
         while (true)
         {
+            if (GameManager.instance.isGameover)
+            {
+                yield break; // Coroutine Á¾·á
+            }
+
             float waitTime = Random.Range(2.0f, 4.0f);
             yield return new WaitForSeconds(waitTime);
 
